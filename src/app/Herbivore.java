@@ -17,19 +17,16 @@ public class Herbivore implements ICrosser{
 
 	@Override
 	public boolean canSail() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double getWeight() {
-		// TODO Auto-generated method stub
 		return weight;
 	}
 
 	@Override
 	public int getEatingRank() {
-		// TODO Auto-generated method stub
 		return eatingRank;
 	}
 

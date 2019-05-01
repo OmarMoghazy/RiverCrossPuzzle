@@ -20,11 +20,6 @@ public class StoryOneCrossingStrategy implements ICrossingStrategy {
 	public boolean isValid(List<ICrosser> rightBankCrossers, List<ICrosser> leftBankCrossers,
 			List<ICrosser> boatRiders) {
 		// boat validation
-		int flag = 0;
-		for(ICrosser x : boatRiders) {
-			if(x instanceof Farmer) flag = 1;
-		}
-		if(flag == 0) return false;
 		if(boatRiders.size() > 2) return false;
 		
 		// left bank validation

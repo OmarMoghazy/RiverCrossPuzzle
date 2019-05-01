@@ -21,12 +21,7 @@ public class StoryTwoCrossingStrategy implements ICrossingStrategy {
 	@Override
 	public boolean isValid(List<ICrosser> rightBankCrossers, List<ICrosser> leftBankCrossers,
 			List<ICrosser> boatRiders) {
-		int flag = 0;
 		double weight=0.0;
-		for(ICrosser x : boatRiders) {
-			if(x instanceof Farmer) flag = 1;
-		}
-		if(flag == 0) return false;
  
 		for (ICrosser x : boatRiders) {
  

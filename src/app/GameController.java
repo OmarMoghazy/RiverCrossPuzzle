@@ -60,6 +60,7 @@ public class GameController implements IRiverCrossingController {
 
 	@Override
 	public boolean canMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
+		int flag = 0;
 		if (fromLeftToRightBank) {
 			for (ICrosser x : crossers) {
 				leftBankCrossers.remove(x);
@@ -72,6 +73,11 @@ public class GameController implements IRiverCrossingController {
 		for (ICrosser x : crossers) {
 			boatRiders.add(x);
 		}
+		
+		for(ICrosser x : boatRiders) {
+			if(x.canSail()) flag = 1;
+		}
+		if(flag == 0) return false;
 
 		if (!crossingStrategy.isValid(rightBankCrossers, leftBankCrossers, boatRiders)) {
 			if (fromLeftToRightBank) {

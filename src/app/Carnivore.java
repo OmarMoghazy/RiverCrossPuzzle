@@ -17,19 +17,16 @@ public class Carnivore implements ICrosser {
 
 	@Override
 	public boolean canSail() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double getWeight() {
-		// TODO Auto-generated method stub
 		return weight;
 	}
 
 	@Override
 	public int getEatingRank() {
-		// TODO Auto-generated method stub
 		return eatingRank;
 	}
 
@@ -45,29 +42,23 @@ public class Carnivore implements ICrosser {
 			image[0] = ImageIO.read(f[0]);
 			System.out.println("loaded monster");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		// TODO Auto-generated method stub
 		return image;
 	}
 
 	@Override
 	public ICrosser makeCopy() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setLabelToBeShown(String label) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String getLabelToBeShown() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
