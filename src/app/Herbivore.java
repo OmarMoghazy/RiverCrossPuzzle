@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 public class Herbivore implements ICrosser{
 
 	private double weight;
-	public static final int eatingRank = 1;
+	private static final int eatingRank = 1;
+	private String label;
+	
 	public Herbivore(double weight) {
 		super();
 		this.weight = weight;
@@ -57,14 +59,13 @@ public class Herbivore implements ICrosser{
 
 	@Override
 	public void setLabelToBeShown(String label) {
-		// TODO Auto-generated method stub
+		this.label = label;
 		
 	}
 
 	@Override
 	public String getLabelToBeShown() {
-		// TODO Auto-generated method stub
-		return null;
+		return label;
 	}
 
 }

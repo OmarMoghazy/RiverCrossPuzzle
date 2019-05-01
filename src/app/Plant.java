@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 public class Plant implements ICrosser {
 
 	private double weight;
-	public static final int eatingRank = 0;
+	private static final int eatingRank = 0;
+	private String label;
+	
 	public Plant(double weight) {
 		super();
 		this.weight = weight;
@@ -45,7 +47,6 @@ public class Plant implements ICrosser {
 			image[0] = ImageIO.read(f[0]);
 			System.out.println("loaded oshb");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();}
 		return image;
 		}
@@ -58,14 +59,12 @@ public class Plant implements ICrosser {
 
 	@Override
 	public void setLabelToBeShown(String label) {
-		// TODO Auto-generated method stub
-		
+		this.label = label;
 	}
 
 	@Override
 	public String getLabelToBeShown() {
-		// TODO Auto-generated method stub
-		return null;
+		return label;
 	}
 	
 }

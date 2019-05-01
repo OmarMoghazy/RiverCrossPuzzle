@@ -6,10 +6,10 @@ import java.util.List;
 public class StoryOneCrossingStrategy implements ICrossingStrategy {
 	Instructions instructions;
 	CrosserFactory crosserFactory = new CrosserFactory();
-	ICrosser farmer = crosserFactory.newCrosser("FARMER", 100);
-	ICrosser carnivore = crosserFactory.newCrosser("CARNIVORE",100);
-	ICrosser herbivore = crosserFactory.newCrosser("HERBIVORE",100);
-	ICrosser plant = crosserFactory.newCrosser("PLANT",100);
+	ICrosser farmer = crosserFactory.newCrosser("FARMER", 100, "Eating Rank: " + 4);
+	ICrosser carnivore = crosserFactory.newCrosser("CARNIVORE",100,"Eating Rank: " + 2);
+	ICrosser herbivore = crosserFactory.newCrosser("HERBIVORE",100,"Eating rank " + 1);
+	ICrosser plant = crosserFactory.newCrosser("PLANT",100, "Eating rank " + 0);
 	ArrayList<ICrosser> initialCrossers = new ArrayList<ICrosser>();
 	
 	public StoryOneCrossingStrategy() {

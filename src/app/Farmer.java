@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 public class Farmer implements ICrosser {
 	private double weight;
 	private static final int eatingRank = 4;
+	private String label;
 	
 	public static int getEatingrank() {
 		return eatingRank;
@@ -70,14 +71,13 @@ public class Farmer implements ICrosser {
 
 	@Override
 	public void setLabelToBeShown(String label) {
-		// TODO Auto-generated method stub
-		
+		this.label = label;
 	}
 
 	@Override
 	public String getLabelToBeShown() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return label;
 	}
 
 }
