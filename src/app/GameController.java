@@ -3,23 +3,22 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoryOneController implements IRiverCrossingController{
+public class GameController implements IRiverCrossingController {
 	private ICrossingStrategy crossingStrategy;
-	
+
 	boolean isBoatOnLeftBank;
 	int numberOfSails;
-	
+
 	ArrayList<ICrosser> boatRiders = new ArrayList<ICrosser>();
 	ArrayList<ICrosser> leftBankCrossers = new ArrayList<ICrosser>();
 	ArrayList<ICrosser> rightBankCrossers = new ArrayList<ICrosser>();
 
-	public StoryOneController(ICrossingStrategy crossingStrategy,
-			ArrayList<ICrosser> boatRiders, ArrayList<ICrosser> leftBankCrossers,
+	public GameController(ArrayList<ICrosser> boatRiders, ArrayList<ICrosser> leftBankCrossers,
 			ArrayList<ICrosser> rightBankCrossers) {
 		isBoatOnLeftBank = true;
-		crossingStrategy = new StoryOneCrossingStrategy();
 	}
 
+	@Override
 	public void newGame(ICrossingStrategy gameStrategy) {
 		crossingStrategy = gameStrategy;
 		leftBankCrossers = (ArrayList<ICrosser>) gameStrategy.getInitialCrossers();
@@ -31,11 +30,11 @@ public class StoryOneController implements IRiverCrossingController{
 		rightBankCrossers.clear();
 		boatRiders.clear();
 		leftBankCrossers = (ArrayList<ICrosser>) crossingStrategy.getInitialCrossers();
+
 	}
 
 	@Override
 	public String[] getInstructions() {
-
 		return crossingStrategy.getInstructions();
 	}
 
@@ -61,50 +60,54 @@ public class StoryOneController implements IRiverCrossingController{
 
 	@Override
 	public boolean canMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
-		
-		if(fromLeftToRightBank) {
-			for(ICrosser x : crossers) {
+		if (fromLeftToRightBank) {
+			for (ICrosser x : crossers) {
 				leftBankCrossers.remove(x);
 			}
-		}
-		else {
-			for(ICrosser x : crossers) {
+		} else {
+			for (ICrosser x : crossers) {
 				rightBankCrossers.remove(x);
 			}
 		}
-		for(ICrosser x : crossers) {
+		for (ICrosser x : crossers) {
 			boatRiders.add(x);
 		}
-		
-		if(!crossingStrategy.isValid(rightBankCrossers, leftBankCrossers, boatRiders)) {
-			if(fromLeftToRightBank) {
-				for(ICrosser x : crossers) {
+
+		if (!crossingStrategy.isValid(rightBankCrossers, leftBankCrossers, boatRiders)) {
+			if (fromLeftToRightBank) {
+				for (ICrosser x : crossers) {
 					leftBankCrossers.add(x);
 				}
-			}
-			else {
-				for(ICrosser x : crossers) {
+			} else {
+				for (ICrosser x : crossers) {
 					rightBankCrossers.add(x);
 				}
 			}
-			for(ICrosser x : crossers) {
+			for (ICrosser x : crossers) {
 				boatRiders.remove(x);
 			}
 			return false;
-		}
+		} 
 		else return true;
 	}
 
+	@Override
 	public void doMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
-		for(ICrosser x : crossers) {
-			if(fromLeftToRightBank) {
-				rightBankCrossers.add(x);
-			}
-			else leftBankCrossers.add(x);
+		if (fromLeftToRightBank) {
+			rightBankCrossers.addAll(boatRiders);
+			isBoatOnLeftBank = false;
 		}
+		else {
+			leftBankCrossers.addAll(boatRiders);
+			isBoatOnLeftBank = true;
+		}
+
+		boatRiders.clear();
 		numberOfSails++;
+
 	}
 
+	@Override
 	public boolean canUndo() {
 		// TODO Auto-generated method stub
 		return false;
@@ -119,24 +122,25 @@ public class StoryOneController implements IRiverCrossingController{
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void redo() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void saveGame() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void loadGame() {
 		// TODO Auto-generated method stub
+
 	}
 
 	@Override
