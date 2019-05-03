@@ -349,6 +349,10 @@ public class StoryGUI implements Initializable {
 	@FXML
 	private void resetAction(ActionEvent event) throws IOException {
 		controller.resetGame();
+		if(controller.getCrossingStrategy() instanceof StoryOneCrossingStrategy)  {
+			crosser5Group.setVisible(false);
+			crosser5ImageView.setVisible(false);
+		}
 		Parent parent = FXMLLoader.load(getClass().getResource("Story1.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(new Scene(parent));

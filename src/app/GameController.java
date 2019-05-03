@@ -36,8 +36,11 @@ public class GameController implements IRiverCrossingController {
 	@Override
 	public void resetGame() {
 		numberOfSails = 0;
+		leftBankCrossers.clear();
 		rightBankCrossers.clear();
 		boatRiders.clear();
+		if(crossingStrategy instanceof StoryOneCrossingStrategy) crossingStrategy = new StoryOneCrossingStrategy();
+		else if(crossingStrategy instanceof StoryTwoCrossingStrategy) crossingStrategy = new StoryTwoCrossingStrategy();
 		leftBankCrossers = (ArrayList<ICrosser>) crossingStrategy.getInitialCrossers();
 		isBoatOnLeftBank = true;
 	}
