@@ -157,6 +157,9 @@ public class StoryGUI implements Initializable {
 				farmerImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 				crossersOnBoat.remove(farmerGroup);
 				crossersOnRight.add(farmerGroup);
+				if(crossersOnRight.size()==4){
+					System.out.println("K.O");
+				}
 			}
 		} else if (crossersOnRight.contains(farmerGroup)) {
 			if (crossersOnBoat.size() < 2) {
@@ -214,6 +217,9 @@ public class StoryGUI implements Initializable {
 
 				crossersOnBoat.remove(oshbGroup);
 				crossersOnRight.add(oshbGroup);
+				if(crossersOnRight.size()==4){
+					System.out.println("K.O");
+				}
 			}
 		} else if (crossersOnRight.contains(oshbGroup)) {
 			if (crossersOnBoat.size() < 2) {
@@ -271,6 +277,9 @@ public class StoryGUI implements Initializable {
 				farkhaImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 				crossersOnBoat.remove(chickenGroup);
 				crossersOnRight.add(chickenGroup);
+				if(crossersOnRight.size()==4){
+					System.out.println("K.O");
+				}
 			}
 		} else if (crossersOnRight.contains(chickenGroup) && !boatOnLeft) {
 			if (crossersOnBoat.size() < 2) {
@@ -328,6 +337,9 @@ public class StoryGUI implements Initializable {
 				shalabyImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 				crossersOnBoat.remove(shalabyGroup);
 				crossersOnRight.add(shalabyGroup);
+				if(crossersOnRight.size()==4){
+					System.out.println("K.O");
+				}
 			}
 		} else if (crossersOnRight.contains(shalabyGroup)) {
 			if (crossersOnBoat.size() < 2) {
@@ -379,7 +391,7 @@ public class StoryGUI implements Initializable {
 			TranslateTransition translateTransition = new TranslateTransition();
             translateTransition.setDuration(Duration.seconds(1));
             translateTransition.setNode(boatImageView);
-            
+           
             if(boatOnLeft){
                 translateTransition.setByX(200);
                 translateTransition.play();
@@ -406,7 +418,7 @@ public class StoryGUI implements Initializable {
             }
 		}
 		crossers.clear();
-		
+		controller.saveGame();
 	}
 
 	public static void setStrategy(ICrossingStrategy gameStrategy) {
