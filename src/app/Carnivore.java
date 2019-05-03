@@ -49,8 +49,7 @@ public class Carnivore implements ICrosser {
 
 	@Override
 	public ICrosser makeCopy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Carnivore(this.weight);
 	}
 
 	@Override

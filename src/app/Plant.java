@@ -48,8 +48,7 @@ public class Plant implements ICrosser {
 
 	@Override
 	public ICrosser makeCopy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Plant(this.weight);
 	}
 
 	@Override

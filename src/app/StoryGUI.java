@@ -375,7 +375,7 @@ public class StoryGUI implements Initializable {
 			TranslateTransition translateTransition = new TranslateTransition();
             translateTransition.setDuration(Duration.seconds(1));
             translateTransition.setNode(boatImageView);
-
+            
             if(boatOnLeft){
                 translateTransition.setByX(200);
                 translateTransition.play();

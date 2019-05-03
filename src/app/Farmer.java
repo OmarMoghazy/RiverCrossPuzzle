@@ -53,8 +53,7 @@ public class Farmer implements ICrosser {
 
 	@Override
 	public ICrosser makeCopy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Farmer(this.weight);
 	}
 
 	@Override

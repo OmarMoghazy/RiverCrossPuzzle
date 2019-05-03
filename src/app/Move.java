@@ -9,8 +9,12 @@ public class Move {
 	private boolean isBoatOnLeftBank;
 	
 	public Move(ArrayList<ICrosser> leftBankCrossers, ArrayList<ICrosser> rightBankCrossers, int numberOfSails, boolean isBoatOnLeftBank) {
-		this.leftBankCrossers = leftBankCrossers;
-		this.rightBankCrossers = rightBankCrossers;
+		for(ICrosser x : leftBankCrossers) {
+			this.leftBankCrossers.add(x);
+		}
+		for(ICrosser x : rightBankCrossers) {
+			this.rightBankCrossers.add(x);
+		}
 		this.numberOfSails = numberOfSails;
 		this.isBoatOnLeftBank = isBoatOnLeftBank;
 	}

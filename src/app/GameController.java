@@ -159,7 +159,6 @@ public class GameController implements IRiverCrossingController {
 		isBoatOnLeftBank = move.isBoatOnLeftBank();
 		numberOfSails = move.getNumberOfSails();
 	}
-
 	@Override
 	public void saveGame() {
 	}

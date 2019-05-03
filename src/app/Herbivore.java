@@ -49,8 +49,7 @@ public class Herbivore implements ICrosser{
 
 	@Override
 	public ICrosser makeCopy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Herbivore(this.weight);
 	}
 
 	@Override
