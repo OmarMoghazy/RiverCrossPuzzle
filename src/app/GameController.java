@@ -18,20 +18,22 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 public class GameController implements IRiverCrossingController {
 	private ICrossingStrategy crossingStrategy;
 	private static GameController instance;
-	private Stack<Move> undoStack = new Stack<Move>();
-	private Stack<Move> redoStack = new Stack<Move>();
-
 	boolean isBoatOnLeftBank;
 	int numberOfSails;
 
 	ArrayList<ICrosser> boatRiders = new ArrayList<ICrosser>();
 	ArrayList<ICrosser> leftBankCrossers = new ArrayList<ICrosser>();
 	ArrayList<ICrosser> rightBankCrossers = new ArrayList<ICrosser>();
+	
+	UndoRedo undoredo = new UndoRedo(leftBankCrossers, rightBankCrossers, isBoatOnLeftBank, numberOfSails);
+	RemoteControl control = new RemoteControl();
+	Do Undo = new UndoCommand(undoredo);
+	Do Redo;
+	
 
 	private GameController() {
 	}
@@ -91,7 +93,7 @@ public class GameController implements IRiverCrossingController {
 	@Override
 	public boolean canMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
 		Move move = new Move(leftBankCrossers, rightBankCrossers, numberOfSails, isBoatOnLeftBank);
-		undoStack.add(move);
+		undoredo.AddToStack(move);
 		int flag = 0;
 		if (fromLeftToRightBank) {
 			for (ICrosser x : crossers) {
@@ -127,7 +129,7 @@ public class GameController implements IRiverCrossingController {
 			for (ICrosser x : crossers) {
 				boatRiders.remove(x);
 			}
-			undoStack.remove(move);
+			undoredo.removeFromStack();
 			return false;
 		} else {
 			return true;
@@ -153,32 +155,25 @@ public class GameController implements IRiverCrossingController {
 
 	@Override
 	public boolean canUndo() {
-		return !undoStack.isEmpty();
+		return !undoredo.getUndoStack().isEmpty();
 	}
 
 	@Override
 	public boolean canRedo() {
-		return !redoStack.isEmpty();
+		return !undoredo.getRedoStack().isEmpty();
 	}
 
 	@Override
 	public void undo() {
-		redoStack.push(new Move(leftBankCrossers, rightBankCrossers, numberOfSails, isBoatOnLeftBank));
-		Move move = undoStack.pop();
-		leftBankCrossers = move.getLeftBankCrossers();
-		rightBankCrossers = move.getRightBankCrossers();
-		isBoatOnLeftBank = move.isBoatOnLeftBank();
-		numberOfSails = move.getNumberOfSails();
+		control.setCommand(Undo);
+		control.PressButton();
 	}
 
 	@Override
 	public void redo() {
-		undoStack.push(new Move(leftBankCrossers, rightBankCrossers, numberOfSails, isBoatOnLeftBank));
-		Move move = redoStack.pop();
-		leftBankCrossers = move.getLeftBankCrossers();
-		rightBankCrossers = move.getRightBankCrossers();
-		isBoatOnLeftBank = move.isBoatOnLeftBank();
-		numberOfSails = move.getNumberOfSails();
+		control.setCommand(Redo);
+		control.PressButton();
+
 	}
 
 	@Override
@@ -202,48 +197,58 @@ public class GameController implements IRiverCrossingController {
 			Element BoatPosition = document.createElement("BoatPosition");
 
 			document.appendChild(Story);
-			Story.appendChild(RightBankers);
-			Story.appendChild(LeftBankers);
-			Story.appendChild(Score);
-			Story.appendChild(BoatPosition);
+			
+			
 
 			if (crossingStrategy instanceof StoryOneCrossingStrategy) {
 				Story.appendChild(document.createTextNode("Story One"));
+				
 				for (ICrosser x : rightBankCrossers) {
+					Story.appendChild(RightBankers);
 					if (x instanceof Plant)
-						RightBankers.appendChild(document.createElement("Plant"));
+						RightBankers.appendChild(document.createTextNode("Plant,"));
 					else if (x instanceof Carnivore)
-						RightBankers.appendChild(document.createElement("Carnicore"));
+						RightBankers.appendChild(document.createTextNode("Carnicore,"));
 					else if (x instanceof Herbivore)
-						RightBankers.appendChild(document.createElement("Herbivore"));
+						RightBankers.appendChild(document.createTextNode("Herbivore,"));
 					else
-						RightBankers.appendChild(document.createElement("Farmer"));
+						RightBankers.appendChild(document.createTextNode("Farmer,"));
 				}
 
 				for (ICrosser x : leftBankCrossers) {
+					Story.appendChild(LeftBankers);
 					if (x instanceof Plant)
-						LeftBankers.appendChild(document.createElement("Plant"));
+						LeftBankers.appendChild(document.createTextNode("Plant,"));
 					else if (x instanceof Carnivore)
-						LeftBankers.appendChild(document.createElement("Carnicore"));
+						LeftBankers.appendChild(document.createTextNode("Carnicore,"));
 					else if (x instanceof Herbivore)
-						LeftBankers.appendChild(document.createElement("Herbivore"));
+						LeftBankers.appendChild(document.createTextNode("Herbivore,"));
 					else
-						LeftBankers.appendChild(document.createElement("Farmer"));
+						LeftBankers.appendChild(document.createTextNode("Farmer,"));
 				}
 			}
 
 			else {
-				Story.appendChild(document.createTextNode("Story Two"));
+				Story.appendChild(document.createElement("Story Two"));
 				for (ICrosser x : rightBankCrossers) {
+					Story.appendChild(RightBankers);
 					String w = Double.toString(x.getWeight());
 					RightBankers.appendChild(document.createElement(w));
 				}
 				for (ICrosser x : leftBankCrossers) {
+					Story.appendChild(LeftBankers);
 					String w = Double.toString(x.getWeight());
 					LeftBankers.appendChild(document.createElement(w));
 				}
+				
 
 			}
+			
+			
+				Story.appendChild(Score);
+				Score.appendChild(document.createTextNode(Integer.toString(numberOfSails))); 
+				Story.appendChild(BoatPosition);
+				BoatPosition.appendChild(document.createTextNode(Boolean.toString(isBoatOnLeftBank))); 
 
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();

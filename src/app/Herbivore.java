@@ -40,7 +40,11 @@ public class Herbivore implements ICrosser{
 		BufferedImage[] image = new BufferedImage[8];
 		image[0] = new BufferedImage(226, 247, BufferedImage.TYPE_INT_ARGB);
 		try {
-			image[0] = ImageIO.read(new File("Chicken.png"));
+			int x = (int)(Math.random()*2);
+			if(x==0)
+				image[0] = ImageIO.read(new File("Chicken.png"));
+			else
+			image[0] = ImageIO.read(new File("Cow.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

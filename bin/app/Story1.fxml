@@ -7,39 +7,103 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.StoryGUI">
-      <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <Image url="@../../background.png" />
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.StoryGUI">
+   <children>
+         <ImageView fx:id="bgImageView" fitHeight="600.0" fitWidth="800.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../background.png" />
+         </image>
       </ImageView>
-       <ImageView fx:id="boatImageView" fitHeight="110.0" fitWidth="443.0" layoutX="150.0" layoutY="470.0" nodeOrientation="RIGHT_TO_LEFT">
-              <Image url="@../../carnivore.png" />
-       </ImageView>
-      <Group fx:id="shalabyGroup" layoutX="235.0" layoutY="396.0" onMouseClicked="#shalabyClick">
-             <ImageView fx:id="shalabyImageView" fitHeight="100.0" fitWidth="100.0" />
-            <Label text="shalaby" />
+          <ImageView fx:id="boatImageView" fitHeight="110.0" fitWidth="443.0" layoutX="150.0" layoutY="470.0" nodeOrientation="RIGHT_TO_LEFT">
+         <image>
+            <Image url="@../../carnivore.png" />
+         </image>
+      </ImageView>
+         <Group fx:id="shalabyGroup" layoutX="235.0" layoutY="396.0" onMouseClicked="#shalabyClick">
+            <children>
+                   <ImageView fx:id="shalabyImageView" fitHeight="100.0" fitWidth="100.0">
+               <image>
+                  <Image url="@../../carnivore2.png" />
+               </image></ImageView>
+                  <Label fx:id="shalabylabel" layoutX="10.0" layoutY="-10.0" text="shalaby" />
+            </children>
+         </Group>
+         <Group fx:id="chickenGroup" layoutX="150.0" layoutY="405.0" onMouseClicked="#chickenClick">
+            <children>
+                   <ImageView fx:id="farkhaImageView" fitHeight="100.0" fitWidth="100.0" layoutX="9.0" layoutY="15.0">
+               <image>
+                  <Image url="@../../Chicken.png" />
+               </image></ImageView>
+                  <Label fx:id="farkhalabel" layoutX="10.0" layoutY="-10.0" text="chicken" />
+            </children>
+         </Group>
+         <Group fx:id="oshbGroup" layoutX="109.0" layoutY="430.0" onMouseClicked="#oshbClick">
+            <children>
+                   <ImageView fx:id="oshbImageView" fitHeight="100.0" fitWidth="100.0">
+               <image>
+                   <Image url="@../../Oshb.png" />
+               </image>
+                   </ImageView>
+                  <Label fx:id="oshblabel" layoutX="10.0" layoutY="-20.0" text="oshb" />
+            </children>
+         </Group>
+         <Group fx:id="farmerGroup" layoutX="51.0" layoutY="445.0" onMouseClicked="#farmerClick">
+            <children>
+                   <ImageView fx:id="farmerImageView" fitHeight="100.0" fitWidth="100.0">
+               <image>
+                  <Image url="@../../Farmer.png" />
+               </image></ImageView>
+                  <Label fx:id="farmerlabel" layoutX="10.0" layoutY="-50.0" prefHeight="28.0" prefWidth="100.0" text="farmer" />
+            </children>
+         </Group>
+      <Group fx:id="crosser5Group" layoutX="270.0" layoutY="380.0" onMouseClicked="#crosser5Click">
+         <children>
+               <ImageView fx:id="crosser5ImageView" fitHeight="100.0" fitWidth="100.0">
+               <image>
+                  <Image url="@../../Chicken.png" />
+               </image></ImageView>
+               <Label fx:id="crosser5label" layoutX="10.0" layoutY="-10.0" prefHeight="28.0" prefWidth="61.0" text="crosser 5" />
+         </children>
       </Group>
-      <Group fx:id="chickenGroup" layoutX="163.0" layoutY="431.0" onMouseClicked="#chickenClick">
-             <ImageView fx:id="farkhaImageView" fitHeight="69.0" fitWidth="63.0" layoutX="9.0" layoutY="15.0" nodeOrientation="RIGHT_TO_LEFT">
-             </ImageView>
-            <Label layoutY="-8.0" text="chicken" />
-      </Group>
-      <Group fx:id="oshbGroup" layoutX="119.0" layoutY="479.0" onMouseClicked="#oshbClick">
-             <ImageView fx:id="oshbImageView" fitHeight="50.0" fitWidth="50.0">
-             </ImageView>
-            <Label layoutX="1.0" layoutY="-16.0" text="oshb" />
-      </Group>
-      <Group fx:id="farmerGroup" layoutX="70.0" layoutY="470.0" onMouseClicked="#farmerClick">
-             <ImageView fx:id="farmerImageView" fitHeight="100.0" fitWidth="100.0" layoutX="-26.0" layoutY="-22.0">
-             </ImageView>
-            <Label layoutX="-6.0" layoutY="-50.0" prefHeight="28.0" prefWidth="61.0" text="farmer" />
-      </Group>
-      <Button fx:id="go" layoutX="505.0" layoutY="191.0" mnemonicParsing="false" onAction="#goAction" text="Go" />
-      <Button fx:id="reset" layoutX="593.0" layoutY="191.0" mnemonicParsing="false" onAction="#resetAction" text="reset" />
-      <Button fx:id="back" layoutX="684.0" layoutY="191.0" mnemonicParsing="false" onAction="#backAction" text="back" />
-   <Group fx:id="crosser5Group" layoutX="326.0" layoutY="406.0" onMouseClicked="#farmerClick">
-      <children>
-         <ImageView fx:id="crosser5ImageView" fitHeight="100.0" fitWidth="100.0" layoutX="-26.0" layoutY="-22.0" />
-         <Label layoutX="-6.0" layoutY="-50.0" prefHeight="28.0" prefWidth="61.0" />
-      </children>
-   </Group>
+         <Button fx:id="go" layoutX="451.0" layoutY="300.0" mnemonicParsing="false" onAction="#goAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-background-color: #00FF00;" text="Go" />
+      <Button fx:id="save" layoutX="574.0" layoutY="42.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;" text="save" />
+         <Button fx:id="back" layoutX="672.0" layoutY="42.0" mnemonicParsing="false" onAction="#backAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
+         <graphic>
+            <ImageView fx:id="backImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../back.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="undo" layoutX="35.0" layoutY="38.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
+              <graphic>
+                  <ImageView fx:id="undoImageView" fitHeight="50.0" fitWidth="50.0">
+                     <image>
+                       <Image url="@../../undo.png" />
+                     </image>
+                 </ImageView>
+              </graphic>
+      </Button>
+         <Button fx:id="reset" layoutX="119.0" layoutY="42.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;" text="reset" />
+      <Button fx:id="redo" layoutX="185.0" layoutY="38.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
+        <graphic>
+            <ImageView fx:id="redoImageView" fitHeight="50.0" fitWidth="50.0" nodeOrientation="RIGHT_TO_LEFT">
+               <image>
+                    <Image url="@../../undo.png" />
+               </image>
+              </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="476.0" layoutY="46.0" minHeight="50.0" mnemonicParsing="false" prefWidth="50.0" style="-fx-background-radius: 200;">
+         <graphic>
+            <ImageView fx:id="instructionsImageView" fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../instructions.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="285.0" layoutY="59.0" text="Score : " />
+      <Label fx:id="scoreLabel" layoutX="343.0" layoutY="59.0" text="0" />
+   </children>
 </AnchorPane>
