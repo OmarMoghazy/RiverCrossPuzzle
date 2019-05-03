@@ -69,7 +69,7 @@ public class GameController implements IRiverCrossingController {
 
 	@Override
 	public boolean canMove(List<ICrosser> crossers, boolean fromLeftToRightBank) {
-		Move move = new Move(leftBankCrossers,rightBankCrossers,numberOfSails,isBoatOnLeftBank);
+		Move move = new Move(leftBankCrossers, rightBankCrossers, numberOfSails, isBoatOnLeftBank);
 		undoStack.add(move);
 		int flag = 0;
 		if (fromLeftToRightBank) {
@@ -86,12 +86,13 @@ public class GameController implements IRiverCrossingController {
 		}
 
 		for (ICrosser x : boatRiders) {
-			if (x.canSail())
+			if (x.canSail()) {
 				flag = 1;
+				break;
+			}
 		}
 		if (flag == 0)
 			return false;
-
 		if (!crossingStrategy.isValid(rightBankCrossers, leftBankCrossers, boatRiders)) {
 			if (fromLeftToRightBank) {
 				for (ICrosser x : crossers) {
@@ -161,14 +162,10 @@ public class GameController implements IRiverCrossingController {
 
 	@Override
 	public void saveGame() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void loadGame() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

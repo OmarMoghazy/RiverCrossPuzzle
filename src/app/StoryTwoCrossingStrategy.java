@@ -24,7 +24,6 @@ public class StoryTwoCrossingStrategy implements ICrossingStrategy {
 		double weight=0.0;
  
 		for (ICrosser x : boatRiders) {
- 
 			weight=weight+x.getWeight();
 		}
 		return (weight<=100);

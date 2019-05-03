@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.NewGameController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/javafx/8.0.172-ea" fx:controller="app.NewGameController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="505.0" BorderPane.alignment="CENTER">
-         <children>
             <Label layoutX="226.0" layoutY="39.0" prefHeight="51.0" prefWidth="148.0" text="New Game">
                <font>
                   <Font size="28.0" />
@@ -24,7 +23,6 @@
             <Button fx:id="startButton" layoutX="160.0" layoutY="199.0" mnemonicParsing="false" onAction="#startNewGame" prefHeight="74.0" prefWidth="133.0" text="Start New Game" textAlignment="CENTER" />
             <Button fx:id="backButton" layoutX="308.0" layoutY="200.0" mnemonicParsing="false" onAction="#back" prefHeight="72.0" prefWidth="133.0" text="Back" textAlignment="CENTER" />
             <ChoiceBox fx:id="choiceBox" layoutX="247.0" layoutY="118.0" prefWidth="150.0" />
-         </children>
       </AnchorPane>
    </center>
 </BorderPane>

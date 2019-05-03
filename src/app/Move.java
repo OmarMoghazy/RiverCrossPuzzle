@@ -6,11 +6,13 @@ public class Move {
 	private ArrayList<ICrosser> leftBankCrossers = new ArrayList<ICrosser>();
 	private ArrayList<ICrosser> rightBankCrossers = new ArrayList<ICrosser>();
 	private int numberOfSails;
+	private boolean isBoatOnLeftBank;
 	
-	public Move(ArrayList<ICrosser> leftBankCrossers, ArrayList<ICrosser> rightBankCrossers, int numberOfSails) {
+	public Move(ArrayList<ICrosser> leftBankCrossers, ArrayList<ICrosser> rightBankCrossers, int numberOfSails, boolean isBoatOnLeftBank) {
 		this.leftBankCrossers = leftBankCrossers;
 		this.rightBankCrossers = rightBankCrossers;
 		this.numberOfSails = numberOfSails;
+		this.isBoatOnLeftBank = isBoatOnLeftBank;
 	}
 	public ArrayList<ICrosser> getLeftBankCrossers() {
 		return leftBankCrossers;
@@ -29,5 +31,11 @@ public class Move {
 	}
 	public void setNumberOfSails(int numberOfSails) {
 		this.numberOfSails = numberOfSails;
+	}
+	public boolean isBoatOnLeftBank() {
+		return isBoatOnLeftBank;
+	}
+	public void setBoatOnLeftBank(boolean isBoatOnLeftBank) {
+		this.isBoatOnLeftBank = isBoatOnLeftBank;
 	}
 }
