@@ -69,6 +69,12 @@ public class StoryGUI implements Initializable {
 	private ArrayList<ICrosser> crossers = new ArrayList<ICrosser>();
 
 	private boolean boatOnLeft;
+	
+	ICrosser crosser1;
+	ICrosser crosser2;
+	ICrosser crosser3;
+	ICrosser crosser4;
+	ICrosser crosser5;
 
 	@SuppressWarnings("unused")
 	@Override
@@ -82,28 +88,32 @@ public class StoryGUI implements Initializable {
 		crossersOnLeft.add(chickenGroup);
 		crossersOnLeft.add(crosser5Group);
 		boatOnLeft = true;
-
-		Image farmerImage = SwingFXUtils.toFXImage(controller.leftBankCrossers.get(0).getImages()[0], null);
+		
+		crosser1 = controller.leftBankCrossers.get(0);
+		Image farmerImage = SwingFXUtils.toFXImage(crosser1.getImages()[0], null);
 		farmerImageView.setImage(farmerImage);
-
-		Image shalabyImage = SwingFXUtils.toFXImage(controller.leftBankCrossers.get(1).getImages()[0], null);
+		
+		crosser2 = controller.leftBankCrossers.get(1);
+		Image shalabyImage = SwingFXUtils.toFXImage(crosser2.getImages()[0], null);
 		shalabyImageView.setImage(shalabyImage);
 
-		Image farkhaImage = SwingFXUtils.toFXImage(controller.leftBankCrossers.get(2).getImages()[0], null);
+		crosser3 = controller.leftBankCrossers.get(2);
+		Image farkhaImage = SwingFXUtils.toFXImage(crosser3.getImages()[0], null);
 		farkhaImageView.setImage(farkhaImage);
 
-		Image oshbImage = SwingFXUtils.toFXImage(controller.leftBankCrossers.get(3).getImages()[0], null);
+		crosser4 = controller.leftBankCrossers.get(3);
+		Image oshbImage = SwingFXUtils.toFXImage(crosser4.getImages()[0], null);
 		oshbImageView.setImage(oshbImage);
+		
 		try {
-			Image crosser5 = SwingFXUtils.toFXImage(controller.leftBankCrossers.get(4).getImages()[0], null);
-			crosser5ImageView.setImage(crosser5);
+			crosser5 = controller.leftBankCrossers.get(4);
+			Image crosser5img = SwingFXUtils.toFXImage(crosser5.getImages()[0], null);
+			crosser5ImageView.setImage(crosser5img);
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("no");
 			crosser5Group.setVisible(false);
 		}
-
 	}
-
 	@FXML
 	private void farmerClick() {
 		TranslateTransition translateTransition = new TranslateTransition();
@@ -355,8 +365,44 @@ public class StoryGUI implements Initializable {
 
 	@FXML
 	private void goAction(ActionEvent event) throws IOException {
+		if(crossersOnBoat.contains(farmerGroup)) crossers.add(crosser1);
+		if(crossersOnBoat.contains(shalabyGroup)) crossers.add(crosser2);
+		if(crossersOnBoat.contains(chickenGroup)) crossers.add(crosser3);
+		if(crossersOnBoat.contains(oshbGroup)) crossers.add(crosser4);
+		if(crossersOnBoat.contains(crosser5Group)) crossers.add(crosser5);
+		if(controller.canMove(crossers, boatOnLeft)) {
+			controller.doMove(crossers, boatOnLeft);
+			TranslateTransition translateTransition = new TranslateTransition();
+            translateTransition.setDuration(Duration.seconds(1));
+            translateTransition.setNode(boatImageView);
 
-		// controller.canMove(crossers, controller.isBoatOnLeftBank);
+            if(boatOnLeft){
+                translateTransition.setByX(200);
+                translateTransition.play();
+                for(int i= 0; i<crossersOnBoat.size(); i++){
+                    TranslateTransition translateTransition1 = new TranslateTransition();
+                    translateTransition1.setDuration(Duration.seconds(1));
+                    translateTransition1.setNode(crossersOnBoat.get(i));
+                    translateTransition1.setByX(200);
+                    translateTransition1.play();
+                }
+                boatOnLeft = false;
+            }
+            else if(!boatOnLeft){
+                translateTransition.setByX(-200);
+                translateTransition.play();
+                for(int i= 0; i<crossersOnBoat.size(); i++){
+                    TranslateTransition translateTransition1 = new TranslateTransition();
+                    translateTransition1.setDuration(Duration.seconds(1));
+                    translateTransition1.setNode(crossersOnBoat.get(i));
+                    translateTransition1.setByX(-200);
+                    translateTransition1.play();
+                }
+                boatOnLeft = true;
+            }
+		}
+		crossers.clear();
+		
 	}
 
 	public static void setStrategy(ICrossingStrategy gameStrategy) {

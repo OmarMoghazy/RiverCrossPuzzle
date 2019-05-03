@@ -354,34 +354,7 @@ public class StoryOneController implements Initializable {
      @FXML
     private void goAction(){
         if(crossersOnBoat.contains(farmerGroup)){
-            TranslateTransition translateTransition = new TranslateTransition();
-            translateTransition.setDuration(Duration.seconds(1));
-            translateTransition.setNode(boatImageView);
-
-            if(boatOnLeft){
-                translateTransition.setByX(200);
-                translateTransition.play();
-                for(int i= 0; i<crossersOnBoat.size(); i++){
-                    TranslateTransition translateTransition1 = new TranslateTransition();
-                    translateTransition1.setDuration(Duration.seconds(1));
-                    translateTransition1.setNode(crossersOnBoat.get(i));
-                    translateTransition1.setByX(200);
-                    translateTransition1.play();
-                }
-                boatOnLeft = false;
-            }
-            else if(!boatOnLeft){
-                translateTransition.setByX(-200);
-                translateTransition.play();
-                for(int i= 0; i<crossersOnBoat.size(); i++){
-                    TranslateTransition translateTransition1 = new TranslateTransition();
-                    translateTransition1.setDuration(Duration.seconds(1));
-                    translateTransition1.setNode(crossersOnBoat.get(i));
-                    translateTransition1.setByX(-200);
-                    translateTransition1.play();
-                }
-                boatOnLeft = true;
-            }
+            
         }
          else{
             System.out.println("farmer must be on the boat");

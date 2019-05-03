@@ -7,8 +7,8 @@ import java.util.Stack;
 public class GameController implements IRiverCrossingController {
 	private ICrossingStrategy crossingStrategy;
 	private static GameController instance;
-	private Stack<Move> undoStack;
-	private Stack<Move> redoStack;
+	private Stack<Move> undoStack = new Stack<Move>();
+	private Stack<Move> redoStack = new Stack<Move>();
 
 	boolean isBoatOnLeftBank;
 	int numberOfSails;
