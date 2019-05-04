@@ -7,8 +7,8 @@ public class UndoRedo {
 	
 	ArrayList<ICrosser> leftBankCrossers = new ArrayList<ICrosser>();
 	ArrayList<ICrosser> rightBankCrossers = new ArrayList<ICrosser>();
-	private Stack<Move> undoStack;
-	private Stack<Move> redoStack;
+	private Stack<Move> undoStack = new Stack<Move>();
+	private Stack<Move> redoStack= new Stack<Move>();
 	boolean isBoatOnLeftBank;
 	int numberOfSails;
 	
