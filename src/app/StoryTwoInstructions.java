@@ -2,9 +2,8 @@ package app;
 
 public class StoryTwoInstructions implements Instructions {
 
-	String[] instructions;
-
-	public String[] getInstructions() {
+	String[] instructions = new String[5];
+	public StoryTwoInstructions() { 
 		instructions[0] = "“Four farmers and their animal "
 				+ "need to cross a river in a small boat. "
 				+ "The weights of the farmers are 90 kg, "
@@ -19,7 +18,9 @@ public class StoryTwoInstructions implements Instructions {
 		
 		instructions[3] = "Can you figure out how to get the farmer, his two "
 				+ "animals and his plant to the other side with no losses?";
-		
+	}
+
+	public String[] getInstructions() {
 		return instructions;
 	}
 

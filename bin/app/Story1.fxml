@@ -7,19 +7,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.StoryGUI">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.StoryGUI">
    <children>
          <ImageView fx:id="bgImageView" fitHeight="600.0" fitWidth="800.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../background.png" />
          </image>
       </ImageView>
-          <ImageView fx:id="boatImageView" fitHeight="110.0" fitWidth="443.0" layoutX="150.0" layoutY="470.0" nodeOrientation="RIGHT_TO_LEFT">
+          <ImageView fx:id="boatImageView" fitHeight="110.0" fitWidth="443.0" layoutX="150.0" layoutY="470.0">
          <image>
             <Image url="@../../carnivore.png" />
          </image>
       </ImageView>
-         <Group fx:id="shalabyGroup" layoutX="235.0" layoutY="396.0" onMouseClicked="#shalabyClick">
+         <Group fx:id="shalabyGroup" layoutX="235.0" layoutY="396.0" onMouseClicked="#shalabyClick" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="386.0">
             <children>
                    <ImageView fx:id="shalabyImageView" fitHeight="100.0" fitWidth="100.0">
                <image>
@@ -47,7 +47,7 @@
                   <Label fx:id="oshblabel" layoutX="10.0" layoutY="-20.0" text="oshb" />
             </children>
          </Group>
-         <Group fx:id="farmerGroup" layoutX="51.0" layoutY="445.0" onMouseClicked="#farmerClick">
+         <Group fx:id="farmerGroup" layoutX="51.0" layoutY="445.0" onMouseClicked="#farmerClick" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="395.0">
             <children>
                    <ImageView fx:id="farmerImageView" fitHeight="100.0" fitWidth="100.0">
                <image>
@@ -66,8 +66,8 @@
          </children>
       </Group>
          <Button fx:id="go" layoutX="451.0" layoutY="300.0" mnemonicParsing="false" onAction="#goAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-background-color: #00FF00;" text="Go" />
-      <Button fx:id="save" layoutX="574.0" layoutY="42.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;" text="save" />
-         <Button fx:id="back" layoutX="672.0" layoutY="42.0" mnemonicParsing="false" onAction="#backAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
+      <Button layoutX="574.0" layoutY="46.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;" text="Save" />
+         <Button layoutX="672.0" layoutY="42.0" mnemonicParsing="false" onAction="#backAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
          <graphic>
             <ImageView fx:id="backImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -75,7 +75,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="undo" layoutX="35.0" layoutY="38.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
+      <Button layoutX="35.0" layoutY="38.0" mnemonicParsing="false" onAction="#undoAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
               <graphic>
                   <ImageView fx:id="undoImageView" fitHeight="50.0" fitWidth="50.0">
                      <image>
@@ -85,7 +85,7 @@
               </graphic>
       </Button>
          <Button fx:id="reset" layoutX="119.0" layoutY="42.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;" text="reset" />
-      <Button fx:id="redo" layoutX="185.0" layoutY="38.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
+      <Button layoutX="185.0" layoutY="38.0" mnemonicParsing="false" onAction="#redoAction" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 200;">
         <graphic>
             <ImageView fx:id="redoImageView" fitHeight="50.0" fitWidth="50.0" nodeOrientation="RIGHT_TO_LEFT">
                <image>
@@ -94,7 +94,7 @@
               </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="476.0" layoutY="46.0" minHeight="50.0" mnemonicParsing="false" prefWidth="50.0" style="-fx-background-radius: 200;">
+      <Button layoutX="476.0" layoutY="46.0" minHeight="50.0" mnemonicParsing="false" onAction="#instructionsAction" prefWidth="50.0" style="-fx-background-radius: 200;">
          <graphic>
             <ImageView fx:id="instructionsImageView" fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -105,5 +105,15 @@
       </Button>
       <Label layoutX="285.0" layoutY="59.0" text="Score : " />
       <Label fx:id="scoreLabel" layoutX="343.0" layoutY="59.0" text="0" />
+      <ImageView fx:id="fly2" fitHeight="150.0" fitWidth="200.0" layoutX="69.0" layoutY="150.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#fly2Click" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../fly1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="fly1" fitHeight="150.0" fitWidth="200.0" layoutX="493.0" layoutY="150.0" onMouseClicked="#fly1Click" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../fly1.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

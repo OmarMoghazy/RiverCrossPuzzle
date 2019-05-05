@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.embed.swing.SwingFXUtils;
@@ -19,8 +18,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,9 +27,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.*;
-
-@SuppressWarnings("unused")
 public class StoryGUI implements Initializable {
 
 	static ICrossingStrategy crossingStrategy;
@@ -50,17 +44,15 @@ public class StoryGUI implements Initializable {
 	@FXML private ImageView redoImageView;
 	@FXML private ImageView backImageView;
 	@FXML private ImageView instructionsImageView;
+	@FXML private ImageView fly1;
+	@FXML private ImageView fly2;
 	@FXML private Group shalabyGroup;
 	@FXML private Group oshbGroup;
 	@FXML private Group farmerGroup;
 	@FXML private Group chickenGroup;
 	@FXML private Group crosser5Group;
-	@FXML private Button go;
-	@FXML private Button save;
-	@FXML private Button back;
-	@FXML private Button undo;
 	@FXML private Button reset;
-	@FXML private Button redo;
+	@FXML private Button go;
 	@FXML private Label farmerlabel;
 	@FXML private Label oshblabel;
 	@FXML private Label farkhalabel;
@@ -71,18 +63,16 @@ public class StoryGUI implements Initializable {
 	private ArrayList<Group> crossersOnBoat = new ArrayList<Group>();
 	private ArrayList<Group> crossersOnLeft = new ArrayList<Group>();
 	private ArrayList<Group> crossersOnRight = new ArrayList<Group>();
-
 	private ArrayList<ICrosser> crossers = new ArrayList<ICrosser>();
 
 	private boolean boatOnLeft;
-	
+
 	ICrosser crosser1;
 	ICrosser crosser2;
 	ICrosser crosser3;
 	ICrosser crosser4;
 	ICrosser crosser5;
 
-	@SuppressWarnings("unused")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		controller = GameController.getInstance();
@@ -122,6 +112,8 @@ public class StoryGUI implements Initializable {
 		redoImageView.setImage(new Image(new File("undo.png").toURI().toString()));
 		instructionsImageView.setImage(new Image(new File("instructions.png").toURI().toString()));
 		redoImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+		fly1.setImage(new Image(new File("fly1.png").toURI().toString()));
+		fly2.setImage(new Image(new File("fly1.png").toURI().toString()));
 
 		try {
 			crosser5 = controller.leftBankCrossers.get(4);
@@ -133,7 +125,11 @@ public class StoryGUI implements Initializable {
 			crosser5Group.setVisible(false);
 		}
 	}
-	@FXML private void farmerClick() {
+
+	//51 + 180
+	//445 -20
+	@FXML
+	private void farmerClick() {
 		TranslateTransition translateTransition = new TranslateTransition();
 		translateTransition.setDuration(Duration.seconds(1));
 		translateTransition.setNode(farmerGroup);
@@ -152,7 +148,7 @@ public class StoryGUI implements Initializable {
 
 				crossersOnBoat.add(farmerGroup);
 				crossersOnLeft.remove(farmerGroup);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -178,12 +174,11 @@ public class StoryGUI implements Initializable {
 				crossersOnBoat.remove(farmerGroup);
 				crossersOnRight.add(farmerGroup);
 
-				if(crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy){
+				if (crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
-				}
-				else if(crossersOnRight.size() == 5){
+				} else if (crossersOnRight.size() == 5) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
@@ -199,18 +194,19 @@ public class StoryGUI implements Initializable {
 				farmerImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 				crossersOnBoat.add(farmerGroup);
 				crossersOnRight.remove(farmerGroup);
-			}
-			else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
-		}
-		else {
+		} else {
 			System.out.println("tb");
 		}
 	}
 
-	@FXML private void oshbClick()  {
+	//109+200
+	//430-5
+	@FXML
+	private void oshbClick() {
 		RotateTransition rotateTransition = new RotateTransition();
 		rotateTransition.setDuration(Duration.seconds(1));
 		rotateTransition.setNode(oshbGroup);
@@ -228,7 +224,7 @@ public class StoryGUI implements Initializable {
 
 				crossersOnBoat.add(oshbGroup);
 				crossersOnLeft.remove(oshbGroup);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -253,12 +249,11 @@ public class StoryGUI implements Initializable {
 				crossersOnBoat.remove(oshbGroup);
 				crossersOnRight.add(oshbGroup);
 
-				if(crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy){
+				if (crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
-				}
-				else if(crossersOnRight.size() == 5){
+				} else if (crossersOnRight.size() == 5) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
@@ -275,7 +270,7 @@ public class StoryGUI implements Initializable {
 
 				crossersOnBoat.add(oshbGroup);
 				crossersOnRight.remove(oshbGroup);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -284,7 +279,10 @@ public class StoryGUI implements Initializable {
 		}
 	}
 
-	@FXML private void chickenClick() {
+	//150+80
+	//405+20
+	@FXML
+	private void chickenClick() {
 		TranslateTransition translateTransition = new TranslateTransition();
 		translateTransition.setDuration(Duration.seconds(1));
 		translateTransition.setNode(chickenGroup);
@@ -301,7 +299,7 @@ public class StoryGUI implements Initializable {
 
 				crossersOnBoat.add(chickenGroup);
 				crossersOnLeft.remove(chickenGroup);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -325,12 +323,11 @@ public class StoryGUI implements Initializable {
 				crossersOnBoat.remove(chickenGroup);
 				crossersOnRight.add(chickenGroup);
 
-				if(crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy){
+				if (crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
-				}
-				else if(crossersOnRight.size() == 5){
+				} else if (crossersOnRight.size() == 5) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
@@ -346,7 +343,7 @@ public class StoryGUI implements Initializable {
 				farkhaImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 				crossersOnBoat.add(chickenGroup);
 				crossersOnRight.remove(chickenGroup);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -355,7 +352,10 @@ public class StoryGUI implements Initializable {
 		}
 	}
 
-	@FXML private void shalabyClick() {
+	//235+20
+	//396+15
+	@FXML
+	private void shalabyClick() {
 		TranslateTransition translateTransition = new TranslateTransition();
 		translateTransition.setDuration(Duration.seconds(1));
 		translateTransition.setNode(shalabyGroup);
@@ -372,7 +372,7 @@ public class StoryGUI implements Initializable {
 				rotateTransition.play();
 				crossersOnBoat.add(shalabyGroup);
 				crossersOnLeft.remove(shalabyGroup);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -396,12 +396,11 @@ public class StoryGUI implements Initializable {
 				crossersOnBoat.remove(shalabyGroup);
 				crossersOnRight.add(shalabyGroup);
 
-				if(crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy){
+				if (crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
-				}
-				else if(crossersOnRight.size() == 5){
+				} else if (crossersOnRight.size() == 5) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
@@ -417,7 +416,7 @@ public class StoryGUI implements Initializable {
 				shalabyImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 				crossersOnBoat.add(shalabyGroup);
 				crossersOnRight.remove(shalabyGroup);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -426,7 +425,10 @@ public class StoryGUI implements Initializable {
 		}
 	}
 
-	@FXML private void crosser5Click(){
+	//270
+	//380+50
+	@FXML
+	private void crosser5Click() {
 		TranslateTransition translateTransition = new TranslateTransition();
 		translateTransition.setDuration(Duration.seconds(1));
 		translateTransition.setNode(crosser5Group);
@@ -442,13 +444,13 @@ public class StoryGUI implements Initializable {
 				rotateTransition.play();
 				crossersOnBoat.add(crosser5Group);
 				crossersOnLeft.remove(crosser5Group);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
 		} else if (crossersOnBoat.contains(crosser5Group)) {
 			if (boatOnLeft) {
-				//270, 380
+				// 270, 380
 				translateTransition.setByY(-50);
 				rotateTransition.setByAngle(-360);
 				translateTransition.play();
@@ -466,12 +468,11 @@ public class StoryGUI implements Initializable {
 				crossersOnBoat.remove(crosser5Group);
 				crossersOnRight.add(crosser5Group);
 
-				if(crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy){
+				if (crossersOnRight.size() == 4 && crossingStrategy instanceof StoryOneCrossingStrategy) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
-				}
-				else if(crossersOnRight.size() == 5){
+				} else if (crossersOnRight.size() == 5) {
 					System.out.println("K.O");
 					alertBox("gg wp", "ggwp.png");
 					reset.fire();
@@ -487,7 +488,7 @@ public class StoryGUI implements Initializable {
 				crosser5ImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 				crossersOnBoat.add(crosser5Group);
 				crossersOnRight.remove(crosser5Group);
-			} else{
+			} else {
 				System.out.println("tb only 2 at a time tb");
 				alertBox("u kidding meeee", "warn.png");
 			}
@@ -496,7 +497,38 @@ public class StoryGUI implements Initializable {
 		}
 	}
 
-	@FXML private void resetAction(ActionEvent event) throws IOException {
+	@FXML
+	private void fly1Click(){
+		TranslateTransition translateTransition = new TranslateTransition();
+		RotateTransition rotateTransition = new RotateTransition();
+		translateTransition.setDuration(Duration.seconds(1));
+		rotateTransition.setDuration(Duration.seconds(1));
+		translateTransition.setNode(fly1);
+		rotateTransition.setCycleCount(10);
+		rotateTransition.setNode(fly1);
+		translateTransition.setByX(-10000);
+		translateTransition.setAutoReverse(true);
+		rotateTransition.play();
+		translateTransition.play();
+	}
+
+	@FXML
+	private void fly2Click(){
+		TranslateTransition translateTransition = new TranslateTransition();
+		RotateTransition rotateTransition = new RotateTransition();
+		translateTransition.setDuration(Duration.seconds(1));
+		rotateTransition.setDuration(Duration.seconds(1));
+		translateTransition.setNode(fly2);
+		rotateTransition.setNode(fly2);
+		rotateTransition.setCycleCount(10);
+		translateTransition.setByX(10000);
+		translateTransition.setAutoReverse(true);
+		rotateTransition.play();
+		translateTransition.play();
+	}
+
+	@FXML
+	private void resetAction(ActionEvent event) throws IOException {
 		controller.resetGame();
 		Parent parent = FXMLLoader.load(getClass().getResource("Story1.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -504,95 +536,329 @@ public class StoryGUI implements Initializable {
 		stage.show();
 	}
 
-	@FXML private void backAction(ActionEvent event) throws IOException {
+	@FXML
+	private void backAction(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("NewGame.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(new Scene(parent));
 		stage.show();
 	}
-	private void backToMain(ActionEvent event) throws IOException{
+
+	@FXML
+	private void backToMain(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(new Scene(parent));
 		stage.show();
 	}
 
-	@FXML private void goAction(ActionEvent event) throws IOException {
-		if(crossersOnBoat.contains(farmerGroup)) crossers.add(crosser1);
-		if(crossersOnBoat.contains(shalabyGroup)) crossers.add(crosser2);
-		if(crossersOnBoat.contains(chickenGroup)) crossers.add(crosser3);
-		if(crossersOnBoat.contains(oshbGroup)) crossers.add(crosser4);
-		if(crossersOnBoat.contains(crosser5Group)) crossers.add(crosser5);
-		if(controller.canMove(crossers, boatOnLeft)) {
+	@FXML
+	private void goAction(ActionEvent event) throws IOException {
+		if (crossersOnBoat.contains(farmerGroup))
+			crossers.add(crosser1);
+		if (crossersOnBoat.contains(shalabyGroup))
+			crossers.add(crosser2);
+		if (crossersOnBoat.contains(chickenGroup))
+			crossers.add(crosser3);
+		if (crossersOnBoat.contains(oshbGroup))
+			crossers.add(crosser4);
+		if (crossersOnBoat.contains(crosser5Group))
+			crossers.add(crosser5);
+		if (controller.canMove(crossers, boatOnLeft)) {
 			controller.doMove(crossers, boatOnLeft);
 			TranslateTransition translateTransition = new TranslateTransition();
-            translateTransition.setDuration(Duration.seconds(1));
-            translateTransition.setNode(boatImageView);
-            
-            if(boatOnLeft){
-                translateTransition.setByX(200);
-                translateTransition.play();
-                for(int i= 0; i<crossersOnBoat.size(); i++){
-                    TranslateTransition translateTransition1 = new TranslateTransition();
-                    translateTransition1.setDuration(Duration.seconds(1));
-                    translateTransition1.setNode(crossersOnBoat.get(i));
-                    translateTransition1.setByX(200);
-                    translateTransition1.play();
-                }
-                boatOnLeft = false;
-            }
-            else if(!boatOnLeft){
-                translateTransition.setByX(-200);
-                translateTransition.play();
-                for(int i= 0; i<crossersOnBoat.size(); i++){
-                    TranslateTransition translateTransition1 = new TranslateTransition();
-                    translateTransition1.setDuration(Duration.seconds(1));
-                    translateTransition1.setNode(crossersOnBoat.get(i));
-                    translateTransition1.setByX(-200);
-                    translateTransition1.play();
-                }
-                boatOnLeft = true;
-            }
-            scoreLabel.setText(Integer.toString(controller.getNumberOfSails()));
+			translateTransition.setDuration(Duration.seconds(1));
+			translateTransition.setNode(boatImageView);
+
+			if (boatOnLeft) {
+				translateTransition.setByX(200);
+				translateTransition.play();
+				for (int i = 0; i < crossersOnBoat.size(); i++) {
+					TranslateTransition translateTransition1 = new TranslateTransition();
+					translateTransition1.setDuration(Duration.seconds(1));
+					translateTransition1.setNode(crossersOnBoat.get(i));
+					translateTransition1.setByX(200);
+					translateTransition1.play();
+				}
+				boatOnLeft = false;
+			} else if (!boatOnLeft) {
+				translateTransition.setByX(-200);
+				translateTransition.play();
+				for (int i = 0; i < crossersOnBoat.size(); i++) {
+					TranslateTransition translateTransition1 = new TranslateTransition();
+					translateTransition1.setDuration(Duration.seconds(1));
+					translateTransition1.setNode(crossersOnBoat.get(i));
+					translateTransition1.setByX(-200);
+					translateTransition1.play();
+				}
+				boatOnLeft = true;
+			}
+			scoreLabel.setText(Integer.toString(controller.getNumberOfSails()));
 		}
-		else if(crossingStrategy instanceof StoryOneCrossingStrategy){
-			if(crossersOnLeft.contains(shalabyGroup) && crossersOnLeft.contains(chickenGroup)){
-				alertBox("u kidding meeee", "warn2.png");
-			}
-			else if(crossersOnRight.contains(shalabyGroup) && crossersOnRight.contains(chickenGroup)){
-				alertBox("u kidding meeee", "warn2.png");
-			}
-			else if(crossersOnLeft.contains(oshbGroup) && crossersOnLeft.contains(chickenGroup)){
-				alertBox("u kidding meeee", "warn3.png");
-			}
-			else if(crossersOnRight.contains(oshbGroup) && crossersOnRight.contains(chickenGroup)){
-				alertBox("u kidding meeee", "warn3.png");
-			}
-			else if(!crossersOnBoat.contains(farmerGroup)){
-				alertBox("u kidding meeee", "warn1.png");
-			}
+		else if (crossingStrategy instanceof StoryOneCrossingStrategy) {
+			if (!crossersOnBoat.contains(farmerGroup)) alertBox("u kidding meeee", "warn1.png");
+			else if (crossersOnLeft.contains(shalabyGroup) && crossersOnLeft.contains(chickenGroup))  alertBox("u kidding meeee", "warn2.png");
+			else if (crossersOnRight.contains(shalabyGroup) && crossersOnRight.contains(chickenGroup))  alertBox("u kidding meeee", "warn2.png");
+			else if (crossersOnLeft.contains(oshbGroup) && crossersOnLeft.contains(chickenGroup)) alertBox("u kidding meeee", "warn3.png");
+			else if (crossersOnRight.contains(oshbGroup) && crossersOnRight.contains(chickenGroup))  alertBox("u kidding meeee", "warn3.png");
 		}
-		else if(crossingStrategy instanceof StoryTwoCrossingStrategy){
+		else if (crossingStrategy instanceof StoryTwoCrossingStrategy) {
 			double weight = 0;
 			for (ICrosser x : crossers) {
 				weight = weight + x.getWeight();
 			}
-			if(crossersOnBoat.contains(crosser5Group) && crossersOnBoat.size() == 1){
-				alertBox("u kidding meeee", "warn1.png");
-			}
-			else if(weight>100){
-				alertBox("u kidding meeee", "warn4.png");
-			}
+			if (crossersOnBoat.contains(crosser5Group) && crossersOnBoat.size() == 1) alertBox("u kidding meeee", "warn1.png");
+			else if (weight > 100) alertBox("u kidding meeee", "warn4.png");
 		}
 		crossers.clear();
-		
 	}
+/*
+	@FXML
+	public void undoAction() {
+		if(controller.canUndo()){
+			controller.undo();
+			int flag = 0;
+			if (controller.isBoatOnLeftBank) {
+				if (crossersOnLeft.contains(farmerGroup) && !controller.leftBankCrossers.contains(crosser1)) {
+					farmerClick();
+					flag = 1;
+				}
+				if (crossersOnLeft.contains(shalabyGroup) && !controller.leftBankCrossers.contains(crosser2)) {
+					shalabyClick();
+					flag = 1;
+				}
+				if (crossersOnLeft.contains(chickenGroup) && !controller.leftBankCrossers.contains(crosser3)) {
+					chickenClick();
+					flag = 1;
+				}
+				if (crossersOnLeft.contains(oshbGroup) && !controller.leftBankCrossers.contains(crosser4)) {
+					oshbClick();
+					flag = 1;
+				}
+				if (crossersOnLeft.contains(crosser5Group) && !controller.leftBankCrossers.contains(crosser5)) {
+					crosser5Click();
+					flag = 1;
+				}
 
+			}
+			else {
+				if (crossersOnRight.contains(farmerGroup) && !controller.rightBankCrossers.contains(crosser1)) {
+					farmerClick();
+					flag =1;
+				}
+				if (crossersOnRight.contains(shalabyGroup) && !controller.rightBankCrossers.contains(crosser2)) {
+					shalabyClick();
+					flag = 1;
+				}
+				if (crossersOnRight.contains(chickenGroup) && !controller.rightBankCrossers.contains(crosser3)) {
+					chickenClick();
+					flag = 1;
+				}
+				if (crossersOnRight.contains(oshbGroup) && !controller.rightBankCrossers.contains(crosser4)) {
+					oshbClick();
+					flag = 1;
+				}
+				if (crossersOnRight.contains(crosser5Group) && !controller.rightBankCrossers.contains(crosser5)) {
+					crosser5Click();
+					flag = 1;
+				}
+			}
+			if(flag == 1)
+				go.fire();
+		}
+		else
+			System.out.println("tb tb tb tb");
+
+	}
+	*/
+	@FXML
+	public void undoAction(ActionEvent e) throws IOException, InterruptedException {
+		if(controller.canUndo() /*&& !crossersOnBoat.isEmpty()*/){
+			controller.undo();
+			if (boatOnLeft) {
+				if (crossersOnLeft.contains(farmerGroup) && !controller.leftBankCrossers.contains(crosser1)) {
+					farmerImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					farmerGroup.setTranslateX(630);
+					farmerGroup.setTranslateY(40);
+					crossersOnLeft.remove(farmerGroup);
+					crossersOnRight.add(farmerGroup);
+				}
+				if (crossersOnLeft.contains(oshbGroup) && !controller.leftBankCrossers.contains(crosser4)) {
+					oshbImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					oshbGroup.setTranslateX(530);
+					oshbGroup.setTranslateY(15);
+					crossersOnLeft.remove(oshbGroup);
+					crossersOnRight.add(oshbGroup);
+				}
+				if (crossersOnLeft.contains(chickenGroup) && !controller.leftBankCrossers.contains(crosser3)) {
+					farkhaImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					chickenGroup.setTranslateX(430);
+					chickenGroup.setTranslateY(-10);
+					crossersOnLeft.remove(chickenGroup);
+					crossersOnRight.add(chickenGroup);
+				}
+				if (crossersOnLeft.contains(shalabyGroup) && !controller.leftBankCrossers.contains(crosser2)) {
+					shalabyImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					shalabyGroup.setTranslateX(280);
+					shalabyGroup.setTranslateY(-15);
+					crossersOnLeft.remove(shalabyGroup);
+					crossersOnRight.add(shalabyGroup);
+				}
+				if (crossersOnLeft.contains(crosser5Group) && !controller.leftBankCrossers.contains(crosser5)) {
+					crosser5ImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					crosser5Group.setTranslateX(260);
+					crosser5Group.setTranslateY(20);
+					crossersOnLeft.remove(crosser5Group);
+					crossersOnRight.add(crosser5Group);
+				}
+				crossersOnBoat.clear();
+				crossers.clear();
+				boatOnLeft = false;
+				boatImageView.setTranslateX(200);
+			}
+			else if(!boatOnLeft){
+				if (crossersOnRight.contains(farmerGroup) && !controller.rightBankCrossers.contains(crosser1)) {
+					farmerImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					farmerGroup.setTranslateX(0);
+					farmerGroup.setTranslateY(0);
+					crossersOnLeft.add(farmerGroup);
+					crossersOnRight.remove(farmerGroup);
+				}
+				if (crossersOnRight.contains(oshbGroup) && !controller.rightBankCrossers.contains(crosser4)) {
+					oshbImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					oshbGroup.setTranslateX(0);
+					oshbGroup.setTranslateY(0);
+					crossersOnLeft.add(oshbGroup);
+					crossersOnRight.remove(oshbGroup);
+				}
+				if (crossersOnRight.contains(chickenGroup) && !controller.rightBankCrossers.contains(crosser3)) {
+					farkhaImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					chickenGroup.setTranslateX(0);
+					chickenGroup.setTranslateY(0);
+					crossersOnLeft.add(chickenGroup);
+					crossersOnRight.remove(chickenGroup);
+				}
+				if (crossersOnRight.contains(shalabyGroup) && !controller.rightBankCrossers.contains(crosser2)) {
+					shalabyImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					shalabyGroup.setTranslateX(0);
+					shalabyGroup.setTranslateY(0);
+					crossersOnLeft.add(shalabyGroup);
+					crossersOnRight.remove(shalabyGroup);
+				}
+				if (crossersOnRight.contains(crosser5Group) && !controller.rightBankCrossers.contains(crosser5)) {
+					crosser5ImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					crosser5Group.setTranslateX(0);
+					crosser5Group.setTranslateY(0);
+					crossersOnLeft.add(crosser5Group);
+					crossersOnRight.remove(crosser5Group);
+				}
+				crossersOnBoat.clear();
+				crossers.clear();
+				boatOnLeft = true;
+				boatImageView.setTranslateX(0);
+			}
+		}
+		else{
+			System.out.println("display an error or something");
+		}
+	}
+	
+	public void redoAction() {
+		if(controller.canRedo() /*&& !crossersOnBoat.isEmpty()*/){
+			controller.redo();
+			if (boatOnLeft) {
+				if (crossersOnLeft.contains(farmerGroup) && !controller.leftBankCrossers.contains(crosser1)) {
+					farmerImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					farmerGroup.setTranslateX(630);
+					farmerGroup.setTranslateY(40);
+					crossersOnLeft.remove(farmerGroup);
+					crossersOnRight.add(farmerGroup);
+				}
+				if (crossersOnLeft.contains(oshbGroup) && !controller.leftBankCrossers.contains(crosser4)) {
+					oshbImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					oshbGroup.setTranslateX(530);
+					oshbGroup.setTranslateY(15);
+					crossersOnLeft.remove(oshbGroup);
+					crossersOnRight.add(oshbGroup);
+				}
+				if (crossersOnLeft.contains(chickenGroup) && !controller.leftBankCrossers.contains(crosser3)) {
+					farkhaImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					chickenGroup.setTranslateX(430);
+					chickenGroup.setTranslateY(-10);
+					crossersOnLeft.remove(chickenGroup);
+					crossersOnRight.add(chickenGroup);
+				}
+				if (crossersOnLeft.contains(shalabyGroup) && !controller.leftBankCrossers.contains(crosser2)) {
+					shalabyImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					shalabyGroup.setTranslateX(280);
+					shalabyGroup.setTranslateY(-15);
+					crossersOnLeft.remove(shalabyGroup);
+					crossersOnRight.add(shalabyGroup);
+				}
+				if (crossersOnLeft.contains(crosser5Group) && !controller.leftBankCrossers.contains(crosser5)) {
+					crosser5ImageView.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+					crosser5Group.setTranslateX(260);
+					crosser5Group.setTranslateY(20);
+					crossersOnLeft.remove(crosser5Group);
+					crossersOnRight.add(crosser5Group);
+				}
+				crossersOnBoat.clear();
+				crossers.clear();
+				boatOnLeft = false;
+				boatImageView.setTranslateX(200);
+			}
+			else if(!boatOnLeft){
+				if (crossersOnRight.contains(farmerGroup) && !controller.rightBankCrossers.contains(crosser1)) {
+					farmerImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					farmerGroup.setTranslateX(0);
+					farmerGroup.setTranslateY(0);
+					crossersOnLeft.add(farmerGroup);
+					crossersOnRight.remove(farmerGroup);
+				}
+				if (crossersOnRight.contains(oshbGroup) && !controller.rightBankCrossers.contains(crosser4)) {
+					oshbImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					oshbGroup.setTranslateX(0);
+					oshbGroup.setTranslateY(0);
+					crossersOnLeft.add(oshbGroup);
+					crossersOnRight.remove(oshbGroup);
+				}
+				if (crossersOnRight.contains(chickenGroup) && !controller.rightBankCrossers.contains(crosser3)) {
+					farkhaImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					chickenGroup.setTranslateX(0);
+					chickenGroup.setTranslateY(0);
+					crossersOnLeft.add(chickenGroup);
+					crossersOnRight.remove(chickenGroup);
+				}
+				if (crossersOnRight.contains(shalabyGroup) && !controller.rightBankCrossers.contains(crosser2)) {
+					shalabyImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					shalabyGroup.setTranslateX(0);
+					shalabyGroup.setTranslateY(0);
+					crossersOnLeft.add(shalabyGroup);
+					crossersOnRight.remove(shalabyGroup);
+				}
+				if (crossersOnRight.contains(crosser5Group) && !controller.rightBankCrossers.contains(crosser5)) {
+					crosser5ImageView.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+					crosser5Group.setTranslateX(0);
+					crosser5Group.setTranslateY(0);
+					crossersOnLeft.add(crosser5Group);
+					crossersOnRight.remove(crosser5Group);
+				}
+				crossersOnBoat.clear();
+				crossers.clear();
+				boatOnLeft = true;
+				boatImageView.setTranslateX(0);
+			}
+		}
+		else{
+			System.out.println("display an error or something");
+		}
+	}
+	
 	public static void setStrategy(ICrossingStrategy gameStrategy) {
 		crossingStrategy = gameStrategy;
 	}
 
-	//alertBox
+	// alertBox
 	public static void alertBox(String title, String FileName) {
 		Stage alert = new Stage();
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -609,9 +875,39 @@ public class StoryGUI implements Initializable {
 		alert.setScene(scene);
 		alert.showAndWait();
 	}
-}
 
-//reset after completion
-//crosser 5 transition
-//node orientation
-//win condition in story 2
+	@FXML
+	public void instructionsAction() {
+		Stage alert = new Stage();
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.setTitle("Instructions");
+		alert.setMinHeight(200);
+		alert.setMinWidth(250);
+		Label label0 = new Label(controller.getInstructions()[0]);
+		Label label1 = new Label(controller.getInstructions()[1]);
+		Label label2 = new Label(controller.getInstructions()[2]);
+		Label label3 = new Label(controller.getInstructions()[3]);
+		VBox layout = new VBox(30);
+		layout.getChildren().addAll(label0,label1,label2,label3);
+		layout.setAlignment(Pos.CENTER);
+		Scene scene = new Scene(layout);
+		alert.setScene(scene);
+		alert.showAndWait();
+	}
+	
+	public void saveAction() {
+		controller.saveGame();
+		Stage alert = new Stage();
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.setTitle("Success");
+		alert.setMinHeight(200);
+		alert.setMinWidth(250);
+		Label label = new Label("Save Successful");
+		VBox layout = new VBox(30);
+		layout.getChildren().addAll(label);
+		layout.setAlignment(Pos.CENTER);
+		Scene scene = new Scene(layout);
+		alert.setScene(scene);
+		alert.showAndWait();
+	}
+}

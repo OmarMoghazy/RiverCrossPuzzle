@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<BorderPane fx:controller="app.LoadGameController" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.LoadGameController">
    <center>
       <ListView maxWidth="200.0" prefHeight="300.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <opaqueInsets>
@@ -20,7 +19,7 @@
    </center>
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Load">
+            <Button mnemonicParsing="false" onAction="#loadGame" prefHeight="25.0" prefWidth="92.0" text="Load">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>

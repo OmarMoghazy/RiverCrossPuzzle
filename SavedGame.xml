@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Story><RightBankers><Farmer/><Herbivore/></RightBankers><LeftBankers><Carnicore/><Plant/></LeftBankers><Score/><BoatPosition/>Story One</Story>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Story><StoryLevel>Story One,</StoryLevel><Score>4,</Score><BoatPosition>true,</BoatPosition><LeftBankers>LCarnivore,LFarmer,LHerbivore,</LeftBankers><RightBankers>RPlant,,</RightBankers></Story>
